@@ -1,4 +1,7 @@
 {
   "name": "_09_Suncoast_Overflow",
-  "private": "true"
+  "private": "true",
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  }
 }
