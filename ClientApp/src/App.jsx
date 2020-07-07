@@ -6,17 +6,42 @@ import { render } from 'react-dom'
 
 function TopNavBar() {
   return (
-    <nav className="top-nav">
-      <img src={logo} />
-      <ul>
-        <li>
-          <a href="#">Products</a>
-        </li>
-      </ul>
-      <input type="text" />
-      <div>
-        <button>Log in</button>
-        <button>Sign up</button>
+    <nav>
+      <div className="top-nav">
+        <button>
+          <i class="fas fa-bars"></i>
+        </button>
+        <svg
+          aria-hidden="true"
+          class="native svg-icon iconLogoGlyphMd"
+          width="32"
+          height="37"
+          viewBox="0 0 32 37"
+        >
+          <path d="M26 33v-9h4v13H0V24h4v9h22z" fill="#BCBBBB"></path>
+          <path
+            d="M21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM26 18.4L13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm14 10.79l.68-2.95-16.1-3.35L7 23l16.1 2.99zM23 30H7v-3h16v3z"
+            fill="#F48024"
+          ></path>
+        </svg>
+        <ul>
+          <li>
+            <a href="#">Products</a>
+          </li>
+        </ul>
+        <button>
+          <i class="fas fa-search"></i>
+        </button>
+        <div>
+          <button>Log in</button>
+          <button>Sign up</button>
+        </div>
+      </div>
+      <div className="search">
+        <div>
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="search..." />
+        </div>
       </div>
     </nav>
   )
@@ -24,37 +49,45 @@ function TopNavBar() {
 
 function AllQuestions() {
   return (
-    <main>
-      <div>
+    <main className="all-questions">
+      <header className="all-questions-header">
         <h1>All Questions</h1>
         <button>Ask Question</button>
-      </div>
-      <div>
+      </header>
+      <div className="all-questions-subheader">
         <nav>
           <h2>19,793,012 questions</h2>
           <div>
-            <ul>
-              <li>
-                <button>Newest</button>
-              </li>
-              <li>
-                <button>Active</button>
-              </li>
-              <li>
-                <button>Bountied</button>
-              </li>
-              <li>
-                <button>Unanswered</button>
-              </li>
-              <li>
-                <button>More</button>
-                <ul>
-                  <li>Frequent</li>
-                  <li>Votes</li>
-                </ul>
-                Unanswered (my tags)
-              </li>
-            </ul>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input
+                  type="radio"
+                  name="options"
+                  id="option1"
+                  autocomplete="off"
+                  checked
+                />
+                Newest
+              </label>
+              <label class="btn btn-secondary">
+                <input
+                  type="radio"
+                  name="options"
+                  id="option2"
+                  autocomplete="off"
+                />
+                Active
+              </label>
+              <label class="btn btn-secondary">
+                <input
+                  type="radio"
+                  name="options"
+                  id="option3"
+                  autocomplete="off"
+                />
+                More
+              </label>
+            </div>
             <button>
               <svg
                 aria-hidden="true"
@@ -68,146 +101,36 @@ function AllQuestions() {
               Filter
             </button>
           </div>
-          <div>
-            <form>
-              <div>
-                <fieldset>
-                  <legend>Filter by:</legend>
-                  <input type="checkbox" />
-                  <label>No Answers</label>
-                  <input type="checkbox" />
-                  <label>No accepted answer</label>
-                  <input type="checkbox" />
-                  <label>Has bounty</label>
-                </fieldset>
-
-                <fieldset>
-                  <legend>Sorted by:</legend>
-                  <input type="radio" />
-                  <label>Newest</label>
-                  <input type="radio" />
-                  <label>Recent activity</label>
-                  <input type="radio" />
-                  <label>Most votes</label>
-                  <input type="radio" />
-                  <label>Most frequent</label>
-                  <input type="radio" />
-                  <label>Bounty ending soon</label>
-                </fieldset>
-
-                <fieldset>
-                  <legend>Tagged with</legend>
-                  <input type="radio" />
-                  <label>My watched tags</label>
-                  <input type="radio" />
-                  <label>The following tags:</label>
-                  <input type="text" placeholder="e.g. javascript or java" />
-                </fieldset>
-              </div>
-              <div>
-                <button type="submit">Apply filter</button>
-                <a href="#">Cancel</a>
-              </div>
-            </form>
-          </div>
         </nav>
       </div>
       <div>
-        <div>
-          <div>
-            <div>
-              <strong>210</strong>
-              <p>votes</p>
-            </div>
-            <div>
-              <strong>12</strong>
-              <p>answers</p>
-            </div>
-            <p>2.8m views</p>
-          </div>
-          <div>
-            <h3>text data preprocessing python</h3>
-            <p>
-              tell me, how can I randomly spoil text data for additional
-              training of RNN on python? The data is a set of folders, in each
-              folder there is a set of text files with names from 1 to 100. Each
-              file has ...
-            </p>
-            <div>
-              <ul>
-                <li>
-                  <a href="#">python-3.x</a>
-                </li>
-                <li>
-                  <a href="#">deep-learning</a>
-                </li>
-                <li>
-                  <a href="#">recurrent-neural-network</a>
-                </li>
-              </ul>
+        <div className="question-list">
+          <div className="question-list-item">
+            <div className="votes">
               <div>
+                <strong>210</strong>
+                <p>votes</p>
+              </div>
+              <div>
+                <strong>12</strong>
+                <p>answers</p>
+              </div>
+              <p>2.8m views</p>
+            </div>
+            <div className="question-list-item-content">
+              <h3>text data preprocessing python</h3>
+              <p>
+                tell me, how can I randomly spoil text data for additional
+                training of RNN on python? The data is a set of folders, in each
+                folder there is a set of text files with names from 1 to 100.
+                Each file has ...
+              </p>
+              <div className="question-list-item-content-footer">
                 <p>asked 1 min ago</p>
-                <div>
-                  <img src={profilepic} />
-                  <a href="#">notacorn</a>
-                  <span>1,015</span>
-                  <span>●</span>
-                  <span>3</span>
-                  <span>●</span>
-                  <span>21</span>
-                </div>
               </div>
             </div>
           </div>
         </div>
-        <div>
-          <div>
-            <div>
-              <strong>210</strong>
-              <p>votes</p>
-            </div>
-            <div>
-              <strong>12</strong>
-              <p>answers</p>
-            </div>
-            <p>2.8m views</p>
-          </div>
-          <div>
-            <h3>text data preprocessing python</h3>
-            <p>
-              tell me, how can I randomly spoil text data for additional
-              training of RNN on python? The data is a set of folders, in each
-              folder there is a set of text files with names from 1 to 100. Each
-              file has ...
-            </p>
-            <div>
-              <ul>
-                <li>
-                  <a href="#">python-3.x</a>
-                </li>
-                <li>
-                  <a href="#">deep-learning</a>
-                </li>
-                <li>
-                  <a href="#">recurrent-neural-network</a>
-                </li>
-              </ul>
-              <div>
-                <p>asked 1 min ago</p>
-                <div>
-                  <img src={profilepic} />
-                  <a href="#">notacorn</a>
-                  <span>1,015</span>
-                  <span>●</span>
-                  <span>3</span>
-                  <span>●</span>
-                  <span>21</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <RightAside />
       </div>
       <footer>
         <nav aria-label="...">
@@ -471,47 +394,6 @@ function DisplayQuestion() {
   )
 }
 
-function RightAside() {
-  return (
-    <aside>
-      <h2>Related Tags</h2>
-      <ul>
-        <li>
-          <a href="#">javascript</a> <span>× 2044030</span>
-        </li>
-        <li>
-          <a href="#">java</a> <span>× 1692545</span>
-        </li>
-        <li>
-          <a href="#">python</a> <span>× 1479527</span>
-        </li>
-        <li>
-          <a href="#">c#</a> <span>× 1419586</span>
-        </li>
-        <li>
-          <a href="#">php</a> <span>× 1360669</span>
-        </li>
-        <li>
-          <a href="#">android</a> <span>× 1287261</span>
-        </li>
-        <li>
-          <a href="#">html</a> <span>× 1008268</span>
-        </li>
-        <li>
-          <a href="#">jquery</a> <span>× 994736</span>
-        </li>
-        <li>
-          <a href="#">c++</a> <span>× 681029</span>
-        </li>
-        <li>
-          <a href="#">css</a> <span>× 672500</span>
-        </li>
-      </ul>
-      <a href="#">more related tags</a>
-    </aside>
-  )
-}
-
 function LeftAside() {
   return (
     <aside>
@@ -580,24 +462,8 @@ function LeftAside() {
 }
 
 function Footer() {
-  render(
-    <footer>
-      <a href="#">
-        <svg
-          aria-hidden="true"
-          class="native svg-icon iconLogoGlyphMd"
-          width="32"
-          height="37"
-          viewBox="0 0 32 37"
-        >
-          <path d="M26 33v-9h4v13H0V24h4v9h22z" fill="#BCBBBB"></path>
-          <path
-            d="M21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM26 18.4L13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm14 10.79l.68-2.95-16.1-3.35L7 23l16.1 2.99zM23 30H7v-3h16v3z"
-            fill="#F48024"
-          ></path>
-        </svg>
-      </a>
-
+  return (
+    <footer className="site-footer">
       <ul>
         <h3>Stack Overflow</h3>
         <li>
@@ -713,6 +579,8 @@ export function App() {
   return (
     <>
       <TopNavBar />
+      <AllQuestions />
+      <Footer />
     </>
   )
 }
