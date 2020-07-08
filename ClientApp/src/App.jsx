@@ -1,41 +1,31 @@
 import React from 'react'
 import './custom.scss'
-import logo from './images/logo.png'
-import profilepic from './images/profilepic.png'
-import { render } from 'react-dom'
+import { Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router'
 
 function TopNavBar() {
   return (
     <nav>
       <div className="top-nav">
-        <button>
-          <i class="fas fa-bars"></i>
-        </button>
-        <svg
-          aria-hidden="true"
-          class="native svg-icon iconLogoGlyphMd"
-          width="32"
-          height="37"
-          viewBox="0 0 32 37"
-        >
-          <path d="M26 33v-9h4v13H0V24h4v9h22z" fill="#BCBBBB"></path>
-          <path
-            d="M21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM26 18.4L13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm14 10.79l.68-2.95-16.1-3.35L7 23l16.1 2.99zM23 30H7v-3h16v3z"
-            fill="#F48024"
-          ></path>
-        </svg>
-        <ul>
-          <li>
-            <a href="#">Products</a>
-          </li>
-        </ul>
+        <Link to="/">
+          <svg
+            aria-hidden="true"
+            class="native svg-icon iconLogoGlyphMd"
+            width="32"
+            height="37"
+            viewBox="0 0 32 37"
+          >
+            <path d="M26 33v-9h4v13H0V24h4v9h22z" fill="#BCBBBB"></path>
+            <path
+              d="M21.5 0l-2.7 2 9.9 13.3 2.7-2L21.5 0zM26 18.4L13.3 7.8l2.1-2.5 12.7 10.6-2.1 2.5zM9.1 15.2l15 7 1.4-3-15-7-1.4 3zm14 10.79l.68-2.95-16.1-3.35L7 23l16.1 2.99zM23 30H7v-3h16v3z"
+              fill="#F48024"
+            ></path>
+          </svg>
+        </Link>
+
         <button>
           <i class="fas fa-search"></i>
         </button>
-        <div>
-          <button>Log in</button>
-          <button>Sign up</button>
-        </div>
       </div>
       <div className="search">
         <div>
@@ -47,12 +37,45 @@ function TopNavBar() {
   )
 }
 
+function AllQuestionListItem() {
+  return (
+    <div className="question-list-item">
+      <div className="votes">
+        <div>
+          <strong>10</strong>
+          <p>votes</p>
+        </div>
+        <div>
+          <strong>3</strong>
+          <p>answers</p>
+        </div>
+        <p>2.8m views</p>
+      </div>
+      <div className="question-list-item-content">
+        <Link to="/question/1">
+          <h3>text data preprocessing python</h3>
+        </Link>
+        <p>
+          tell me, how can I randomly spoil text data for additional training of
+          RNN on python? The data is a set of folders, in each folder there is a
+          set of text files with names from 1 to 100. Each file has ...
+        </p>
+        <div className="question-list-item-content-footer">
+          <p>asked 1 min ago</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function AllQuestions() {
   return (
     <main className="all-questions">
       <header className="all-questions-header">
         <h1>All Questions</h1>
-        <button>Ask Question</button>
+        <Link to="/ask">
+          <button>Ask Question</button>
+        </Link>
       </header>
       <div className="all-questions-subheader">
         <nav>
@@ -105,31 +128,11 @@ function AllQuestions() {
       </div>
       <div>
         <div className="question-list">
-          <div className="question-list-item">
-            <div className="votes">
-              <div>
-                <strong>210</strong>
-                <p>votes</p>
-              </div>
-              <div>
-                <strong>12</strong>
-                <p>answers</p>
-              </div>
-              <p>2.8m views</p>
-            </div>
-            <div className="question-list-item-content">
-              <h3>text data preprocessing python</h3>
-              <p>
-                tell me, how can I randomly spoil text data for additional
-                training of RNN on python? The data is a set of folders, in each
-                folder there is a set of text files with names from 1 to 100.
-                Each file has ...
-              </p>
-              <div className="question-list-item-content-footer">
-                <p>asked 1 min ago</p>
-              </div>
-            </div>
-          </div>
+          <AllQuestionListItem />
+          <AllQuestionListItem />
+          <AllQuestionListItem />
+          <AllQuestionListItem />
+          <AllQuestionListItem />
         </div>
       </div>
       <footer>
@@ -162,26 +165,6 @@ function AllQuestions() {
             </li>
           </ul>
         </nav>
-        <nav aria-label="...">
-          <ul class="pagination pagination-sm">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">
-                15
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                30
-              </a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                50
-              </a>
-            </li>
-          </ul>
-          <p>per page</p>
-        </nav>
       </footer>
     </main>
   )
@@ -189,13 +172,12 @@ function AllQuestions() {
 
 function AskQuestion() {
   return (
-    <main>
+    <main className="ask-question">
       <header>
         <h1>Ask a public question</h1>
-        <div>Robot image goes here</div>
       </header>
-      <section>
-        <form>
+      <form>
+        <section>
           <div>
             <fieldset>
               <label>Title</label>
@@ -203,7 +185,10 @@ function AskQuestion() {
                 Be specific and imagine you're asking a questions to another
                 person
               </p>
-              <input type="text" />
+              <input
+                type="text"
+                placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
+              />
             </fieldset>
 
             <fieldset>
@@ -212,49 +197,38 @@ function AskQuestion() {
                 Include all the information someone would need to answer your
                 question
               </p>
-              <input type="text" />
-            </fieldset>
-
-            <fieldset>
-              <label>Tags</label>
-              <p>Add up to 5 tags to describe what your question is about</p>
-              <input type="text" />
+              <textarea type="text" />
             </fieldset>
           </div>
-
-          <button type="submit">Review your question</button>
-        </form>
-      </section>
+        </section>
+        <button type="submit">Review your question</button>
+      </form>
     </main>
   )
 }
 
-function DisplayQuestion() {
+function Question() {
   return (
-    <main>
+    <main className="displayed-question">
       <header>
-        <div>
+        <div className="question-header">
+          <Link to="/ask">
+            <button>Ask a Question</button>
+          </Link>
           <h1>
             How can I create a cloth in ammo.js (bullet physics) with anchors at
             every edge vertex of the cloth geometry?
           </h1>
-          <button>Ask a Question</button>
         </div>
-        <span>
-          <span>Asked</span>
-          <span>today</span>
-        </span>
-        <span>
-          <span>Active</span>
-          <span>today</span>
-        </span>
-        <span>
-          <span>Viewed</span>
-          <span>2 times</span>
-        </span>
+        <div className="question-stats-container">
+          <div>
+            <span>Asked</span>
+            <span>today</span>
+          </div>
+        </div>
       </header>
-      <section>
-        <div>
+      <section className="question">
+        <div className="vote">
           <button>
             <svg
               aria-hidden="true"
@@ -279,6 +253,7 @@ function DisplayQuestion() {
             </svg>
           </button>
         </div>
+
         <div>
           <p>
             What are Null Pointer Exceptions (java.lang.NullPointerException)
@@ -286,57 +261,10 @@ function DisplayQuestion() {
             the cause so that you stop the exception from causing the program to
             terminate prematurely?
           </p>
-          <div>
-            <a href="#">java</a>
-            <a href="#">nullpointerexception</a>
-          </div>
-          <div>
-            <div>
-              <span>share</span>
-              <span>edit</span>
-              <span>follow</span>
-            </div>
-            <p>edited May 26 '16 at 16:15</p>
-
-            <p>Asked 20 mins ago</p>
-          </div>
-          <p>comments </p>
         </div>
       </section>
       <section className="answers">
-        <header className="answers-header">
-          <h3>1 answer</h3>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-              <input
-                type="radio"
-                name="options"
-                id="option1"
-                autocomplete="off"
-                checked
-              />
-              Active
-            </label>
-            <label class="btn btn-secondary">
-              <input
-                type="radio"
-                name="options"
-                id="option2"
-                autocomplete="off"
-              />
-              Oldest
-            </label>
-            <label class="btn btn-secondary">
-              <input
-                type="radio"
-                name="options"
-                id="option3"
-                autocomplete="off"
-              />
-              Votes
-            </label>
-          </div>
-        </header>
+        <h3>1 answer</h3>
 
         <div className="answers-container">
           <div className="answer">
@@ -374,11 +302,86 @@ function DisplayQuestion() {
                 aperiam non quis nulla!
               </p>
               <div className="answer-footer">
-                <div>
-                  <span>share</span>
-                  <span>edit</span>
-                  <span>follow</span>
-                </div>
+                <p>answered 1 mins ago</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="answer">
+            <div className="vote">
+              <button>
+                <svg
+                  aria-hidden="true"
+                  class="m0 svg-icon iconArrowUpLg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                >
+                  <path d="M2 26h32L18 10 2 26z"></path>
+                </svg>
+              </button>
+              <strong>210</strong>
+              <button>
+                <svg
+                  aria-hidden="true"
+                  class="m0 svg-icon iconArrowDownLg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                >
+                  <path d="M2 10h32L18 26 2 10z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div className="answer-content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. At
+                inventore non nisi id soluta deserunt aliquid unde delectus
+                reiciendis excepturi. Eaque eligendi id dolore, ut numquam
+                aperiam non quis nulla!
+              </p>
+              <div className="answer-footer">
+                <p>answered 1 mins ago</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="answer">
+            <div className="vote">
+              <button>
+                <svg
+                  aria-hidden="true"
+                  class="m0 svg-icon iconArrowUpLg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                >
+                  <path d="M2 26h32L18 10 2 26z"></path>
+                </svg>
+              </button>
+              <strong>210</strong>
+              <button>
+                <svg
+                  aria-hidden="true"
+                  class="m0 svg-icon iconArrowDownLg"
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                >
+                  <path d="M2 10h32L18 26 2 10z"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div className="answer-content">
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. At
+                inventore non nisi id soluta deserunt aliquid unde delectus
+                reiciendis excepturi. Eaque eligendi id dolore, ut numquam
+                aperiam non quis nulla!
+              </p>
+              <div className="answer-footer">
                 <p>answered 1 mins ago</p>
               </div>
             </div>
@@ -387,7 +390,7 @@ function DisplayQuestion() {
       </section>
       <form>
         <label>Your Answer</label>
-        <input type="text" />
+        <textarea />
         <button type="submit">Post Your Answer</button>
       </form>
     </main>
@@ -465,7 +468,7 @@ function Footer() {
   return (
     <footer className="site-footer">
       <ul>
-        <h3>Stack Overflow</h3>
+        <h5>Stack Overflow</h5>
         <li>
           <a href="a">Questions</a>
         </li>
@@ -489,7 +492,7 @@ function Footer() {
         </li>
       </ul>
       <ul>
-        <h3>Products</h3>
+        <h5>Products</h5>
         <li>
           <a href="a">Teams</a>
         </li>
@@ -504,7 +507,7 @@ function Footer() {
         </li>
       </ul>
       <ul>
-        <h3>Company</h3>
+        <h5>Company</h5>
         <li>
           <a href="a">About</a>
         </li>
@@ -525,7 +528,7 @@ function Footer() {
         </li>
       </ul>
       <ul>
-        <h3>Stack Exchange Network</h3>
+        <h5>Stack Exchange Network</h5>
         <li>
           <a href="a">Technology</a>
         </li>
@@ -561,15 +564,15 @@ function Footer() {
               <a href="#">Instagram</a>
             </li>
           </ul>
+          <div>
+            <p>
+              site design / logo © 2020 Stack Exchange Inc; user contributions{' '}
+            </p>
+            <p>
+              licensed under <a href="#">cc by-sa</a>. rev 2020.7.6.37182
+            </p>
+          </div>
         </nav>
-        <div>
-          <p>
-            site design / logo © 2020 Stack Exchange Inc; user contributions{' '}
-          </p>
-          <p>
-            licensed under <a href="#">cc by-sa</a>. rev 2020.7.6.37182
-          </p>
-        </div>
       </div>
     </footer>
   )
@@ -579,7 +582,17 @@ export function App() {
   return (
     <>
       <TopNavBar />
-      <AllQuestions />
+      <Switch>
+        <Route exact path="/">
+          <AllQuestions />
+        </Route>
+        <Route path="/question">
+          <Question />
+        </Route>
+        <Route path="/ask">
+          <AskQuestion />
+        </Route>
+      </Switch>
       <Footer />
     </>
   )
