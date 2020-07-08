@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Answer } from '../components/Answer'
+
 export function Question() {
   return (
     <main className="displayed-question">
@@ -26,7 +27,7 @@ export function Question() {
           <button>
             <svg
               aria-hidden="true"
-              class="m0 svg-icon iconArrowUpLg"
+              className="m0 svg-icon iconArrowUpLg"
               width="36"
               height="36"
               viewBox="0 0 36 36"
@@ -38,7 +39,7 @@ export function Question() {
           <button>
             <svg
               aria-hidden="true"
-              class="m0 svg-icon iconArrowDownLg"
+              className="m0 svg-icon iconArrowDownLg"
               width="36"
               height="36"
               viewBox="0 0 36 36"

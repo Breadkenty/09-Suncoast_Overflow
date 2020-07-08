@@ -7,7 +7,7 @@ export function TopNavBar() {
         <Link to="/">
           <svg
             aria-hidden="true"
-            class="native svg-icon iconLogoGlyphMd"
+            className="native svg-icon iconLogoGlyphMd"
             width="32"
             height="37"
             viewBox="0 0 32 37"
@@ -21,12 +21,12 @@ export function TopNavBar() {
         </Link>
 
         <button>
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </button>
       </div>
       <div className="search">
         <div>
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
           <input type="text" placeholder="search..." />
         </div>
       </div>

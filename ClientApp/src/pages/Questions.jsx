@@ -1,7 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AllQuestionListItem } from '../components/AllQuestionListItem'
-export function AllQuestions() {
+
+export function Questions() {
+  const [questions, setQuestions] = useState([])
+
+  useEffect(() => {
+    fetch('/api/Questions')
+      .then(response => response.json())
+      .then(apiData => {
+        console.log(apiData)
+        setQuestions(apiData)
+      })
+  }, [])
+
   return (
     <main className="all-questions">
       <header className="all-questions-header">
@@ -12,10 +24,10 @@ export function AllQuestions() {
       </header>
       <div className="all-questions-subheader">
         <div>
-          <h2>19,793,012 questions</h2>
+          <h2>{questions.length} questions</h2>
           <div>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-secondary active">
+            <div className="btn-group btn-group-toggle" data-toggle="buttons">
+              <label className="btn btn-secondary active">
                 <input
                   type="radio"
                   name="options"
@@ -25,7 +37,7 @@ export function AllQuestions() {
                 />
                 Newest
               </label>
-              <label class="btn btn-secondary">
+              <label className="btn btn-secondary">
                 <input
                   type="radio"
                   name="options"
@@ -34,7 +46,7 @@ export function AllQuestions() {
                 />
                 Active
               </label>
-              <label class="btn btn-secondary">
+              <label className="btn btn-secondary">
                 <input
                   type="radio"
                   name="options"
@@ -47,7 +59,7 @@ export function AllQuestions() {
             <button>
               <svg
                 aria-hidden="true"
-                class="sm:d-none va-middle svg-icon iconGearSm"
+                className="sm:d-none va-middle svg-icon iconGearSm"
                 width="14"
                 height="14"
                 viewBox="0 0 14 14"
@@ -61,38 +73,36 @@ export function AllQuestions() {
       </div>
       <div>
         <div className="question-list">
-          <AllQuestionListItem />
-          <AllQuestionListItem />
-          <AllQuestionListItem />
-          <AllQuestionListItem />
-          <AllQuestionListItem />
+          {questions.map(question => (
+            <AllQuestionListItem key={question.id} question={question} />
+          ))}
         </div>
       </div>
       <footer>
         <nav aria-label="...">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">
+          <ul className="pagination">
+            <li className="page-item disabled">
+              <a className="page-link" href="#" tabindex="-1">
                 Previous
               </a>
             </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
+            <li className="page-item">
+              <a className="page-link" href="#">
                 1
               </a>
             </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">
-                2 <span class="sr-only">(current)</span>
+            <li className="page-item active">
+              <a className="page-link" href="#">
+                2 <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
+            <li className="page-item">
+              <a className="page-link" href="#">
                 3
               </a>
             </li>
-            <li class="page-item">
-              <a class="page-link" href="#">
+            <li className="page-item">
+              <a className="page-link" href="#">
                 Next
               </a>
             </li>
