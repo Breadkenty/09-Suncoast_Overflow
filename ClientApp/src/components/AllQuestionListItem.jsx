@@ -18,7 +18,7 @@ export function AllQuestionListItem(props) {
         <Link to="/question/1">
           <h3>{props.question.title}</h3>
         </Link>
-        <p>{props.question.text}</p>
+        <p>{props.question.body}</p>
         <div className="question-list-item-content-footer">
           <p>{props.question.dateCreated}</p>
         </div>

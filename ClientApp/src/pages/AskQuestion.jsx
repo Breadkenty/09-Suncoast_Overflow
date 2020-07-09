@@ -3,9 +3,10 @@ import { useHistory } from 'react-router'
 
 export function AskQuestion() {
   const history = useHistory()
+  const [errorMessage, setErrorMessage] = useState()
   const [newQuestion, setNewQuestion] = useState({
     title: '',
-    text: '',
+    body: '',
   })
 
   const handleInput = event => {
@@ -24,7 +25,13 @@ export function AskQuestion() {
       body: JSON.stringify(newQuestion),
     })
       .then(response => response.json())
-      .then(history.push('/'))
+      .then(apiData => {
+        if (apiData.status === 400) {
+          setErrorMessage(Object.values(apiData.errors).join(' '))
+        } else {
+          history.push('/')
+        }
+      })
   }
 
   return (
@@ -41,6 +48,11 @@ export function AskQuestion() {
         }}
       >
         <section>
+          {errorMessage && (
+            <div className="alert alert-danger" role="alert">
+              {errorMessage}
+            </div>
+          )}
           <div>
             <fieldset>
               <label htmlFor="title">Title</label>
@@ -64,7 +76,7 @@ export function AskQuestion() {
                 question
               </p>
               <textarea
-                id="text"
+                id="body"
                 type="text"
                 value={newQuestion.text}
                 onChange={handleInput}
@@ -72,6 +84,7 @@ export function AskQuestion() {
             </fieldset>
           </div>
         </section>
+
         <button type="submit">Review your question</button>
       </form>
     </main>
