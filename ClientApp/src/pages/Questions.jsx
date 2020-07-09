@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AllQuestionListItem } from '../components/AllQuestionListItem'
 
-export function Questions() {
+export function Questions(props) {
   const [questions, setQuestions] = useState([])
 
   useEffect(() => {
-    fetch('/api/Questions')
+    const url =
+      props.activeFilter.length === 0
+        ? '/api/Questions'
+        : `/api/Questions?filter=${props.activeFilter}`
+
+    fetch(url)
       .then(response => response.json())
       .then(apiData => {
         console.log(apiData)
         setQuestions(apiData)
       })
-  }, [])
+  }, [props.activeFilter])
 
   return (
     <main className="all-questions">

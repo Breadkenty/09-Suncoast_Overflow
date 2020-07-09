@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-export function TopNavBar() {
+
+export function TopNavBar(props) {
+  const [filterText, setFilterText] = useState('')
+
+  const handleKeyDown = event => {
+    if (event.keyCode === 13) {
+      console.log(filterText)
+      props.setActiveFilter(filterText)
+    }
+  }
+
   return (
     <nav>
       <div className="top-nav">
@@ -27,7 +37,12 @@ export function TopNavBar() {
       <div className="search">
         <div>
           <i className="fas fa-search"></i>
-          <input type="text" placeholder="search..." />
+          <input
+            type="text"
+            placeholder="search..."
+            onChange={event => setFilterText(event.target.value)}
+            onKeyDown={event => handleKeyDown(event)}
+          />
         </div>
       </div>
     </nav>
