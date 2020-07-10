@@ -1,8 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Answer } from '../components/Answer'
 
 export function Question() {
+  const params = useParams()
+  const id = parseInt(params.id)
+  console.log(id)
+
+  const [question, setQuestion] = useState({
+    title: '',
+    body: '',
+    dateCreated: '',
+    netVotes: 0,
+  })
+
+  const handleVote = (event, vote) => {
+    event.preventDefault()
+    const url = `/api/QuestionVotes/${id}/${vote}`
+    fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+    }).then(() => {
+      getQuestion()
+    })
+  }
+
+  const getQuestion = async () => {
+    const response = await fetch(`/api/Questions/${id}`)
+    const apiData = await response.json()
+    setQuestion(apiData)
+  }
+
+  useEffect(() => {
+    getQuestion()
+  }, [])
+
+  console.log(question)
   return (
     <main className="displayed-question">
       <header>
@@ -10,21 +44,22 @@ export function Question() {
           <Link to="/ask">
             <button>Ask a Question</button>
           </Link>
-          <h1>
-            How can I create a cloth in ammo.js (bullet physics) with anchors at
-            every edge vertex of the cloth geometry?
-          </h1>
+          <h1>{question.title}</h1>
         </div>
         <div className="question-stats-container">
           <div>
             <span>Asked</span>
-            <span>today</span>
+            <span>{question.dateCreated}</span>
           </div>
         </div>
       </header>
       <section className="question">
         <div className="vote">
-          <button>
+          <button
+            onClick={event => {
+              handleVote(event, 'upVote')
+            }}
+          >
             <svg
               aria-hidden="true"
               className="m0 svg-icon iconArrowUpLg"
@@ -35,8 +70,12 @@ export function Question() {
               <path d="M2 26h32L18 10 2 26z"></path>
             </svg>
           </button>
-          <strong>210</strong>
-          <button>
+          <strong>{question.netVotes}</strong>
+          <button
+            onClick={event => {
+              handleVote(event, 'downVote')
+            }}
+          >
             <svg
               aria-hidden="true"
               className="m0 svg-icon iconArrowDownLg"
@@ -50,12 +89,7 @@ export function Question() {
         </div>
 
         <div>
-          <p>
-            What are Null Pointer Exceptions (java.lang.NullPointerException)
-            and what causes them? What methods/tools can be used to determine
-            the cause so that you stop the exception from causing the program to
-            terminate prematurely?
-          </p>
+          <p>{question.body}</p>
         </div>
       </section>
       <section className="answers">

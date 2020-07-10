@@ -22,7 +22,7 @@ export function App() {
         <Route exact path="/">
           <Questions activeFilter={activeFilter} />
         </Route>
-        <Route path="/question">
+        <Route path="/question/:id">
           <Question />
         </Route>
         <Route path="/ask">
