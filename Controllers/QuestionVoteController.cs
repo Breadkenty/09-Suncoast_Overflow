@@ -16,7 +16,7 @@ namespace _09_Suncoast_Overflow.Controllers
             _context = context;
         }
 
-        [HttpPost("{id}/{upOrDown")]
+        [HttpPost("{id}/{upOrDown}")]
         public async Task<IActionResult> PostQuestionVote(int id, string upOrDown)
         {
 
@@ -43,9 +43,6 @@ namespace _09_Suncoast_Overflow.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-
         }
-
-
     }
 }
