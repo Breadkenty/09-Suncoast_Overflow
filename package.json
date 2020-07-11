@@ -1,5 +1,5 @@
 {
-  "name": "09_Suncoast_Overflow",
+  "name": "Suncoast_Overflow",
   "private": "true",
   "dependencies": {
     "moment": "^2.27.0",
