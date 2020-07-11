@@ -40,11 +40,19 @@ export function TopNavBar(props) {
             ></path>
           </svg>
         </Link>
-        <Route exact path="/">
-          <button onClick={toggleDisplay}>
-            <i className="fas fa-search"></i>
-          </button>
-        </Route>
+        <div>
+          <Route exact path="/">
+            <button onClick={toggleDisplay}>
+              <i className="fas fa-search"></i>
+            </button>
+          </Route>
+          <Link to="/SignUp">
+            <button>Sign Up</button>
+          </Link>
+          {/* <Link to="/SignIn"> */}
+          <button>Sign In</button>
+          {/* </Link> */}
+        </div>
       </div>
       <div
         className="search"

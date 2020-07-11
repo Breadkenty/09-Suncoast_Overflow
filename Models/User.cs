@@ -8,11 +8,12 @@ namespace _09_Suncoast_Overflow.Models
     {
         public int Id { get; set; }
         [Required]
-        public string FullName { get; set; }
-        [Required]
+        public string DisplayName { get; set; }
+
         public string Email { get; set; }
         [JsonIgnore]
         public string HashedPassword { get; set; }
+        [Required]
         public string Password
         {
             set

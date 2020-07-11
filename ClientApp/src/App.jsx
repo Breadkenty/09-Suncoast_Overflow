@@ -8,6 +8,7 @@ import { Questions } from './pages/Questions'
 import { AskQuestion } from './pages/AskQuestion'
 import { Question } from './pages/Question'
 import { Footer } from './components/Footer'
+import { SignUp } from './pages/SignUp'
 
 export function App() {
   const [activeFilter, setActiveFilter] = useState('')
@@ -27,6 +28,9 @@ export function App() {
         </Route>
         <Route path="/ask">
           <AskQuestion />
+        </Route>
+        <Route path="/signup">
+          <SignUp />
         </Route>
       </Switch>
       <Footer />

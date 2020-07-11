@@ -23,6 +23,19 @@ namespace _09_Suncoast_Overflow.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+
+            var emailExists = _context.Users.Any(existingUser => existingUser.Email.ToLower() == user.Email.ToLower());
+            if (emailExists)
+            {
+                var response = new
+                {
+                    status = 400,
+                    errors = new List<string>() { "This account already exists!" }
+                };
+
+                return BadRequest(response);
+            }
+
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
