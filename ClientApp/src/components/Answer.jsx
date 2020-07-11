@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import moment from 'moment'
+
 export function Answer(prop) {
   const handleAnswerVote = (event, vote) => {
     event.preventDefault()
@@ -50,7 +52,12 @@ export function Answer(prop) {
       <div className="answer-content">
         <p>{prop.answer.body}</p>
         <div className="answer-footer">
-          <p>answered {prop.answer.dateCreated}</p>
+          <p>
+            answered{' '}
+            {moment(prop.answer.dateCreated)
+              .startOf('hour')
+              .fromNow()}
+          </p>
         </div>
       </div>
     </div>

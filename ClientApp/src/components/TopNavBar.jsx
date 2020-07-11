@@ -1,13 +1,24 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Route } from 'react-router'
+import { NONAME } from 'dns'
 
 export function TopNavBar(props) {
   const [filterText, setFilterText] = useState('')
+  const [showSearchBar, setShowSearchBar] = useState(false)
 
   const handleKeyDown = event => {
     if (event.keyCode === 13) {
       console.log(filterText)
       props.setActiveFilter(filterText)
+    }
+  }
+
+  const toggleDisplay = () => {
+    if (showSearchBar === false) {
+      setShowSearchBar(true)
+    } else {
+      setShowSearchBar(false)
     }
   }
 
@@ -29,12 +40,16 @@ export function TopNavBar(props) {
             ></path>
           </svg>
         </Link>
-
-        <button>
-          <i className="fas fa-search"></i>
-        </button>
+        <Route exact path="/">
+          <button onClick={toggleDisplay}>
+            <i className="fas fa-search"></i>
+          </button>
+        </Route>
       </div>
-      <div className="search">
+      <div
+        className="search"
+        style={showSearchBar ? { display: 'block' } : { display: 'none' }}
+      >
         <div>
           <i className="fas fa-search"></i>
           <input

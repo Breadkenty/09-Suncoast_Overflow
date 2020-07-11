@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 function AllQuestionListItem(props) {
   return (
@@ -20,7 +21,11 @@ function AllQuestionListItem(props) {
         </Link>
         <p>{props.question.body}</p>
         <div className="question-list-item-content-footer">
-          <p>{props.question.dateCreated}</p>
+          <p>
+            {moment(props.question.dateCreated)
+              .startOf('hour')
+              .fromNow()}
+          </p>
         </div>
       </div>
     </div>

@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Answer } from '../components/Answer'
 
+import moment from 'moment'
+
 export function Question() {
   const history = useHistory()
   const params = useParams()
@@ -81,7 +83,11 @@ export function Question() {
         <div className="question-stats-container">
           <div>
             <span>Asked</span>
-            <span>{question.dateCreated}</span>
+            <span>
+              {moment(question.dateCreated)
+                .startOf('hour')
+                .fromNow()}
+            </span>
           </div>
         </div>
       </header>
