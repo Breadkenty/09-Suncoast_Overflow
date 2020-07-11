@@ -16,6 +16,7 @@ namespace _09_Suncoast_Overflow.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<QuestionVote> QuestionVotes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

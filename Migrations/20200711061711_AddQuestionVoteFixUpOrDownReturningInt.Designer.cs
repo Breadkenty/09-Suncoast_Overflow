@@ -10,8 +10,8 @@ using _09_Suncoast_Overflow.Models;
 namespace _09Suncoast_Overflow.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200711035150_AddUserIdToQuestionAndAnswer")]
-    partial class AddUserIdToQuestionAndAnswer
+    [Migration("20200711061711_AddQuestionVoteFixUpOrDownReturningInt")]
+    partial class AddQuestionVoteFixUpOrDownReturningInt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,6 +78,27 @@ namespace _09Suncoast_Overflow.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("_09_Suncoast_Overflow.Models.QuestionVote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UpOrDown")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionVotes");
                 });
 
             modelBuilder.Entity("_09_Suncoast_Overflow.Models.User", b =>

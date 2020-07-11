@@ -78,6 +78,27 @@ namespace _09Suncoast_Overflow.Migrations
                     b.ToTable("Questions");
                 });
 
+            modelBuilder.Entity("_09_Suncoast_Overflow.Models.QuestionVote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UpOrDown")
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionVotes");
+                });
+
             modelBuilder.Entity("_09_Suncoast_Overflow.Models.User", b =>
                 {
                     b.Property<int>("Id")

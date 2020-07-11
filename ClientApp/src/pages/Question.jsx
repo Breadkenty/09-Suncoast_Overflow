@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Answer } from '../components/Answer'
+import { authHeader } from '../auth'
 
 import moment from 'moment'
 
@@ -31,7 +32,7 @@ export function Question() {
     const url = `/api/QuestionVotes/${id}/${vote}`
     fetch(url, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...authHeader() },
     }).then(() => {
       getQuestion()
     })
@@ -57,13 +58,9 @@ export function Question() {
       body: JSON.stringify(newAnswer),
     })
       .then(response => response.json())
-      .then(apiData => {
-        if (apiData.status === 400) {
-          setErrorMessage(Object.values(apiData.errors).join(' '))
-        } else {
-          setNewAnswer({ ...newAnswer, body: '' })
-          getQuestion()
-        }
+      .then(apiResponse => {
+        getQuestion()
+        setNewAnswer({ ...newAnswer, body: '' })
       })
   }
 

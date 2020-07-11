@@ -37,7 +37,8 @@ export function AskQuestion() {
           history.push('/')
         } else {
           // This code is not working
-          setErrorMessage(Object.values(apiData.errors).join(' '))
+          const newMessage = Object.values(apiData.errors).join(' ')
+          setErrorMessage(newMessage)
         }
       })
   }
