@@ -109,7 +109,6 @@ namespace _09_Suncoast_Overflow.Controllers
         {
             return _context.Questions.Any(question => question.Id == id);
         }
-
         private int GetCurrentUserId()
         {
             return int.Parse(User.Claims.FirstOrDefault(claim => claim.Type == "Id").Value);

@@ -36,8 +36,8 @@ export function AskQuestion() {
         if (apiData.status === 201) {
           history.push('/')
         } else {
-          // setErrorMessage(Object.values(apiData.errors).join(' '))
           // This code is not working
+          setErrorMessage(Object.values(apiData.errors).join(' '))
         }
       })
   }
