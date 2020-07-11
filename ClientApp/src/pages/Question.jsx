@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Answer } from '../components/Answer'
 
 export function Question() {
+  const history = useHistory()
   const params = useParams()
   const id = parseInt(params.id)
   console.log(id)
@@ -14,6 +15,15 @@ export function Question() {
     dateCreated: '',
     netVotes: 0,
   })
+
+  const [answers, setAnswers] = useState([])
+
+  const [newAnswer, setNewAnswer] = useState({
+    questionId: id,
+    body: '',
+  })
+
+  const [errorMessage, setErrorMessage] = useState()
 
   const handleVote = (event, vote) => {
     event.preventDefault()
@@ -30,13 +40,36 @@ export function Question() {
     const response = await fetch(`/api/Questions/${id}`)
     const apiData = await response.json()
     setQuestion(apiData)
+    setAnswers(apiData.answers)
+  }
+
+  const handleInput = event => {
+    setNewAnswer({ ...newAnswer, body: event.target.value })
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault()
+
+    fetch('/api/Answers', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(newAnswer),
+    })
+      .then(response => response.json())
+      .then(apiData => {
+        if (apiData.status === 400) {
+          setErrorMessage(Object.values(apiData.errors).join(' '))
+        } else {
+          setNewAnswer({ ...newAnswer, body: '' })
+          getQuestion()
+        }
+      })
   }
 
   useEffect(() => {
     getQuestion()
   }, [])
 
-  console.log(question)
   return (
     <main className="displayed-question">
       <header>
@@ -93,19 +126,24 @@ export function Question() {
         </div>
       </section>
       <section className="answers">
-        <h3>1 answer</h3>
+        {answers.length === 0 ? (
+          <h3>No Answers yet</h3>
+        ) : (
+          <h3>{answers.length} answers</h3>
+        )}
 
         <div className="answers-container">
-          <Answer />
-          <Answer />
-          <Answer />
-          <Answer />
-          <Answer />
+          {answers
+            .sort((a, b) => (a.netVotes > b.netVotes ? 1 : -1))
+            .reverse()
+            .map(answer => {
+              return <Answer key={answer.id} answer={answer} />
+            })}
         </div>
       </section>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Your Answer</label>
-        <textarea />
+        <textarea id="body" value={newAnswer.body} onChange={handleInput} />
         <button type="submit">Post Your Answer</button>
       </form>
     </main>

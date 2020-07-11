@@ -1,4 +1,6 @@
 TRUNCATE TABLE "Questions";
+TRUNCATE TABLE "Questions"
+, "Answers" RESTART IDENTITY;
 
 INSERT INTO "Questions"
   ("Title", "Body", "DateCreated", "NetVotes")
@@ -12,3 +14,15 @@ INSERT INTO "Questions"
   ("Title", "Body", "DateCreated", "NetVotes")
 VALUES
   ('Spark-shell: Web UI doesn''t change when I execute process', 'I use Spark in local mode. I run spark-shell and use a file as a data set. All work very good (for example, I ask spark-shell to count the number of words which begin by "a" in the file and I have the good result), but when I see at the web UI, it doesn''t change at all. Do you have any idea why the web UI doesn''t evolve when I run a process?', '01-25-2020', -1);
+
+INSERT INTO "Answers"
+  ("QuestionId", "Body", "DateCreated", "NetVotes")
+VALUES('2', 'Hi insert review here', '01-25-2020', 0);
+
+INSERT INTO "Answers"
+  ("QuestionId", "Body", "DateCreated", "NetVotes")
+VALUES('2', 'Hi insert another review here', '01-26-2020', 2);
+
+INSERT INTO "Answers"
+  ("QuestionId", "Body", "DateCreated", "NetVotes")
+VALUES('2', 'Hi insert aaaand another review here', '01-24-2020', 3);

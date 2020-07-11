@@ -14,6 +14,7 @@ namespace _09_Suncoast_Overflow.Models
         private static bool LOG_SQL_STATEMENTS_IN_DEVELOPMENT = false;
 
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

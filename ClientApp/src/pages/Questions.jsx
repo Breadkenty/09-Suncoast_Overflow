@@ -10,7 +10,7 @@ function AllQuestionListItem(props) {
           <p>votes</p>
         </div>
         <div>
-          <strong>3</strong>
+          <strong>{props.question.answers.length}</strong>
           <p>answers</p>
         </div>
       </div>

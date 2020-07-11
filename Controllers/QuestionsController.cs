@@ -25,18 +25,18 @@ namespace _09_Suncoast_Overflow.Controllers
         {
             if (filter == null)
             {
-                return await _context.Questions.ToListAsync();
+                return await _context.Questions.Include(question => question.Answers).ToListAsync();
             }
             else
             {
-                return await _context.Questions.Where(question => question.Title.Contains(filter)).ToListAsync();
+                return await _context.Questions.Where(question => question.Title.Contains(filter)).Include(question => question.Answers).ToListAsync();
             }
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Question>> GetQuestion(int id)
         {
-            var question = await _context.Questions.FindAsync(id);
+            var question = await _context.Questions.Where(question => question.Id == id).Include(restaurant => restaurant.Answers).FirstOrDefaultAsync();
 
             if (question == null)
             {

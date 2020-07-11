@@ -1,5 +1,5 @@
 import React from 'react'
-export function Answer() {
+export function Answer(prop) {
   return (
     <div className="answer">
       <div className="vote">
@@ -14,7 +14,7 @@ export function Answer() {
             <path d="M2 26h32L18 10 2 26z"></path>
           </svg>
         </button>
-        <strong>210</strong>
+        <strong>{prop.answer.netVotes}</strong>
         <button>
           <svg
             aria-hidden="true"
@@ -29,14 +29,9 @@ export function Answer() {
       </div>
 
       <div className="answer-content">
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. At inventore
-          non nisi id soluta deserunt aliquid unde delectus reiciendis
-          excepturi. Eaque eligendi id dolore, ut numquam aperiam non quis
-          nulla!
-        </p>
+        <p>{prop.answer.body}</p>
         <div className="answer-footer">
-          <p>answered 1 mins ago</p>
+          <p>answered {prop.answer.dateCreated}</p>
         </div>
       </div>
     </div>
