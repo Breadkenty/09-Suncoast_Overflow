@@ -26,6 +26,9 @@ export function AskQuestion() {
       body: JSON.stringify(newQuestion),
     })
       .then(response => {
+        // console.log('response')
+        // console.log(response)
+        // console.log(response.json())
         if (response.status === 401) {
           return { status: 401, errors: { login: 'Not Authorized' } }
         } else {
@@ -33,12 +36,14 @@ export function AskQuestion() {
         }
       })
       .then(apiData => {
-        if (apiData.status === 201) {
-          history.push('/')
-        } else {
-          // This code is not working
+        // console.log('apiData')
+        // console.log(apiData)
+        if (apiData.status === 400 || apiData.status === 401) {
+          console.log(Object.values(apiData.errors).join(' '))
           const newMessage = Object.values(apiData.errors).join(' ')
           setErrorMessage(newMessage)
+        } else {
+          history.push('/')
         }
       })
   }
