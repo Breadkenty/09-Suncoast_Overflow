@@ -99,7 +99,9 @@ export function AskQuestion() {
           </div>
         </section>
 
-        <button type="submit">Review your question</button>
+        <button className="blue-button" type="submit">
+          Review your question
+        </button>
       </form>
     </main>
   )

@@ -52,7 +52,7 @@ export function Answer(prop) {
       <div className="answer-content">
         <p>{prop.answer.body}</p>
         <div className="answer-footer">
-          <p>
+          <p className="light-grey-small">
             answered{' '}
             {moment(prop.answer.dateCreated)
               .startOf('hour')

@@ -8,11 +8,11 @@ function AllQuestionListItem(props) {
       <div className="votes">
         <div>
           <strong>{props.question.netVotes}</strong>
-          <p>votes</p>
+          <p className="light-grey-small">votes</p>
         </div>
         <div>
           <strong>{props.question.answers.length}</strong>
-          <p>answers</p>
+          <p className="light-grey-small">answers</p>
         </div>
       </div>
       <div className="question-list-item-content">
@@ -21,7 +21,7 @@ function AllQuestionListItem(props) {
         </Link>
         <p>{props.question.body}</p>
         <div className="question-list-item-content-footer">
-          <p>
+          <p className="light-grey-small">
             {moment(props.question.dateCreated)
               .startOf('hour')
               .fromNow()}
@@ -52,12 +52,12 @@ export function Questions(props) {
       <header className="all-questions-header">
         <h1>All Questions</h1>
         <Link to="/ask">
-          <button>Ask Question</button>
+          <button className="blue-button">Ask Question</button>
         </Link>
       </header>
       <div className="all-questions-subheader">
         <div>
-          <h2>{questions.length} questions</h2>
+          <h3>{questions.length} questions</h3>
           <div>
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
               <label className="btn btn-secondary active">
@@ -89,7 +89,7 @@ export function Questions(props) {
                 More
               </label>
             </div>
-            <button>
+            <button className="light-blue-button">
               <svg
                 aria-hidden="true"
                 className="sm:d-none va-middle svg-icon iconGearSm"

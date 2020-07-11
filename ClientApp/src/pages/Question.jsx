@@ -105,14 +105,14 @@ export function Question() {
       <header>
         <div className="question-header">
           <Link to="/ask">
-            <button>Ask a Question</button>
+            <button className="blue-button">Ask Question</button>
           </Link>
           <h1>{question.title}</h1>
         </div>
         <div className="question-stats-container">
           <div>
-            <span>Asked</span>
-            <span>
+            <span className="light-grey-small">Asked</span>
+            <span className="black-small">
               {moment(question.dateCreated)
                 .startOf('hour')
                 .fromNow()}

@@ -33,7 +33,7 @@ export function App() {
         <Route path="/signup">
           <SignUp />
         </Route>
-        <Route path="/signin">
+        <Route path="/login">
           <SignIn />
         </Route>
       </Switch>

@@ -49,7 +49,7 @@ export function SignIn() {
           ></path>
         </svg>
       </header>
-      <form onSubmit={handleSubmit}>
+      <form className="login" onSubmit={handleSubmit}>
         <section>
           <div>
             {errorMessage && (

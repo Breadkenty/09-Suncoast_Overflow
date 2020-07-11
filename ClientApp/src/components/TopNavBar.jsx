@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router'
-import { NONAME } from 'dns'
 import { isLoggedIn, logout } from '../auth'
+
+import logo from '../images/suncoastoverflowlogo.png'
 
 export function TopNavBar(props) {
   const [filterText, setFilterText] = useState('')
@@ -45,26 +46,29 @@ export function TopNavBar(props) {
               fill="#F48024"
             ></path>
           </svg>
+          <img src={logo} />
         </Link>
         <div>
           <Route exact path="/">
-            <button onClick={toggleDisplay}>
+            <button className="no-bg-button" onClick={toggleDisplay}>
               <i className="fas fa-search"></i>
             </button>
           </Route>
           {isLoggedIn() || (
-            <Link to="/signup">
-              <button>Sign Up</button>
+            <Link to="/login">
+              <button className="light-blue-button">Log in</button>
             </Link>
           )}
           {isLoggedIn() || (
-            <Link to="/signin">
-              <button>Sign In</button>
+            <Link to="/signup">
+              <button className="blue-button">Sign up</button>
             </Link>
           )}
           {isLoggedIn() && (
             <Link to="/">
-              <button onClick={handleLogout}>Sign Out</button>
+              <button className="blue-button" onClick={handleLogout}>
+                Sign Out
+              </button>
             </Link>
           )}
         </div>
