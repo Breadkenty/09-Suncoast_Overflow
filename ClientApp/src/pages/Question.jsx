@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Answer } from '../components/Answer'
-import { authHeader } from '../auth'
+import { authHeader, isLoggedIn, logout } from '../auth'
 
 import moment from 'moment'
 
@@ -49,18 +49,50 @@ export function Question() {
     setNewAnswer({ ...newAnswer, body: event.target.value })
   }
 
+  // const handleSubmit = event => {
+  //   event.preventDefault()
+
+  //   fetch('/api/Answers', {
+  //     method: 'POST',
+  //     headers: { 'content-type': 'application/json' },
+  //     body: JSON.stringify(newAnswer),
+  //   })
+  //     .then(response => response.json())
+  //     .then(apiResponse => {
+  //       getQuestion()
+  //       setNewAnswer({ ...newAnswer, body: '' })
+  //     })
+  // }
+
   const handleSubmit = event => {
     event.preventDefault()
 
     fetch('/api/Answers', {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...authHeader() },
       body: JSON.stringify(newAnswer),
     })
-      .then(response => response.json())
-      .then(apiResponse => {
-        getQuestion()
-        setNewAnswer({ ...newAnswer, body: '' })
+      .then(response => {
+        // console.log('response')
+        // console.log(response)
+        // console.log(response.json())
+        if (response.status === 401) {
+          return { status: 401, errors: { login: 'Not Authorized' } }
+        } else {
+          return response.json()
+        }
+      })
+      .then(apiData => {
+        // console.log('apiData')
+        // console.log(apiData)
+        if (apiData.status === 400 || apiData.status === 401) {
+          console.log(Object.values(apiData.errors).join(' '))
+          const newMessage = Object.values(apiData.errors).join(' ')
+          setErrorMessage(newMessage)
+        } else {
+          getQuestion()
+          setNewAnswer({ ...newAnswer, body: '' })
+        }
       })
   }
 
@@ -150,9 +182,19 @@ export function Question() {
         </div>
       </section>
       <form onSubmit={handleSubmit}>
-        <label>Your Answer</label>
-        <textarea id="body" value={newAnswer.body} onChange={handleInput} />
-        <button type="submit">Post Your Answer</button>
+        {isLoggedIn() && (
+          <>
+            <label>Your Answer</label>
+            {errorMessage && (
+              <div className="alert alert-danger" role="alert">
+                {errorMessage}
+              </div>
+            )}
+            <textarea id="body" value={newAnswer.body} onChange={handleInput} />
+            <button type="submit">Post Your Answer</button>
+          </>
+        )}
+        {isLoggedIn() || <p>Sign in to answer this question</p>}
       </form>
     </main>
   )
