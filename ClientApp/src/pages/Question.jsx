@@ -7,7 +7,6 @@ export function Question() {
   const history = useHistory()
   const params = useParams()
   const id = parseInt(params.id)
-  console.log(id)
 
   const [question, setQuestion] = useState({
     title: '',
@@ -25,7 +24,7 @@ export function Question() {
 
   const [errorMessage, setErrorMessage] = useState()
 
-  const handleVote = (event, vote) => {
+  const handleQuestionVote = (event, vote) => {
     event.preventDefault()
     const url = `/api/QuestionVotes/${id}/${vote}`
     fetch(url, {
@@ -90,7 +89,7 @@ export function Question() {
         <div className="vote">
           <button
             onClick={event => {
-              handleVote(event, 'upVote')
+              handleQuestionVote(event, 'upVote')
             }}
           >
             <svg
@@ -106,7 +105,7 @@ export function Question() {
           <strong>{question.netVotes}</strong>
           <button
             onClick={event => {
-              handleVote(event, 'downVote')
+              handleQuestionVote(event, 'downVote')
             }}
           >
             <svg
@@ -137,7 +136,13 @@ export function Question() {
             .sort((a, b) => (a.netVotes > b.netVotes ? 1 : -1))
             .reverse()
             .map(answer => {
-              return <Answer key={answer.id} answer={answer} />
+              return (
+                <Answer
+                  key={answer.id}
+                  answer={answer}
+                  getQuestion={getQuestion}
+                />
+              )
             })}
         </div>
       </section>

@@ -1,9 +1,24 @@
 import React from 'react'
 export function Answer(prop) {
+  const handleAnswerVote = (event, vote) => {
+    event.preventDefault()
+    const url = `/api/AnswerVotes/${prop.answer.id}/${vote}`
+    fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+    }).then(() => {
+      prop.getQuestion()
+    })
+  }
+
   return (
     <div className="answer">
       <div className="vote">
-        <button>
+        <button
+          onClick={event => {
+            handleAnswerVote(event, 'upVote')
+          }}
+        >
           <svg
             aria-hidden="true"
             className="m0 svg-icon iconArrowUpLg"
@@ -15,7 +30,11 @@ export function Answer(prop) {
           </svg>
         </button>
         <strong>{prop.answer.netVotes}</strong>
-        <button>
+        <button
+          onClick={event => {
+            handleAnswerVote(event, 'downVote')
+          }}
+        >
           <svg
             aria-hidden="true"
             className="m0 svg-icon iconArrowDownLg"
