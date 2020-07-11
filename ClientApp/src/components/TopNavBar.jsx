@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Route } from 'react-router'
 import { NONAME } from 'dns'
+import { isLoggedIn, logout } from '../auth'
 
 export function TopNavBar(props) {
   const [filterText, setFilterText] = useState('')
@@ -20,6 +21,11 @@ export function TopNavBar(props) {
     } else {
       setShowSearchBar(false)
     }
+  }
+
+  const handleLogout = () => {
+    logout()
+    window.location = '/'
   }
 
   return (
@@ -46,12 +52,21 @@ export function TopNavBar(props) {
               <i className="fas fa-search"></i>
             </button>
           </Route>
-          <Link to="/SignUp">
-            <button>Sign Up</button>
-          </Link>
-          {/* <Link to="/SignIn"> */}
-          <button>Sign In</button>
-          {/* </Link> */}
+          {isLoggedIn() || (
+            <Link to="/signup">
+              <button>Sign Up</button>
+            </Link>
+          )}
+          {isLoggedIn() || (
+            <Link to="/signin">
+              <button>Sign In</button>
+            </Link>
+          )}
+          {isLoggedIn() && (
+            <Link to="/">
+              <button onClick={handleLogout}>Sign Out</button>
+            </Link>
+          )}
         </div>
       </div>
       <div
