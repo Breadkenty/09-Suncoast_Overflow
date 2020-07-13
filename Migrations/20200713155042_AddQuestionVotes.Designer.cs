@@ -10,8 +10,8 @@ using _09_Suncoast_Overflow.Models;
 namespace _09Suncoast_Overflow.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200711061711_AddQuestionVoteFixUpOrDownReturningInt")]
-    partial class AddQuestionVoteFixUpOrDownReturningInt
+    [Migration("20200713155042_AddQuestionVotes")]
+    partial class AddQuestionVotes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
