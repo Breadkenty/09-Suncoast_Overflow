@@ -83,7 +83,9 @@ export function SignIn() {
           </div>
         </section>
 
-        <button type="submit">Sign up</button>
+        <button className="blue-button" type="submit">
+          Sign up
+        </button>
       </form>
     </main>
   )
