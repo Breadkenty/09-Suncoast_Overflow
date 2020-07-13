@@ -1,0 +1,26 @@
+{
+  "name": "09-suncoast_overflow",
+  "version": "1.0.0",
+  "description": "Visit the live site: https://suncoast-overflow-kento.herokuapp.com/",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "node-sass": "^4.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Breadkenty/09-Suncoast_Overflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Breadkenty/09-Suncoast_Overflow/issues"
+  },
+  "homepage": "https://github.com/Breadkenty/09-Suncoast_Overflow#readme"
+}
