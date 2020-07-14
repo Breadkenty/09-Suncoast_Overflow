@@ -191,7 +191,9 @@ export function Question() {
               </div>
             )}
             <textarea id="body" value={newAnswer.body} onChange={handleInput} />
-            <button type="submit">Post Your Answer</button>
+            <button className="blue-button" type="submit">
+              Post Your Answer
+            </button>
           </>
         )}
         {isLoggedIn() || <p>Sign in to answer this question</p>}
