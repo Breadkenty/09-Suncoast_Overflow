@@ -1,6 +1,6 @@
 # 09 Suncoast Overflow
 
-Visit the live site: https://suncoast-overflow-kento.herokuapp.com/
+Visit the live site: https://kento-suncoast-overflow.herokuapp.com/
 
 My first full-stack app that emulates the _Stack Overflow_ website.
 
